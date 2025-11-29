@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>Week 14 Listening & Writing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      font-family: Arial, "Microsoft JhengHei", sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      /* 全站字體放大 */
+      font-size: 22px;
+      line-height: 1.9;
+    }
+
+    .section {
+      width: 100%;
+      max-width: 700px;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 3px solid #ffd3e6;
+    }
+
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin: 4px 0 12px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 18px;
+    }
+
+    .play-btn {
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: none;
+      background: #ff82b5;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin: 4px 6px;
+    }
+
+    .speed-btn {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: none;
+      background: #7cdba0;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 4px 3px;
+    }
+
+    .speed-active {
+      background: #32a852 !important;
+      font-weight: bold;
+    }
+
+    .pic-audio-box {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .progress-box {
+      width: 100%;
+      background: #ffe3ef;
+      height: 14px;
+      border-radius: 7px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #ff4f93;
+      transition: width 0.1s linear;
+    }
+
+    .img-wrap {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .img-wrap img {
+      width: 100%;
+      border-radius: 12px;
+      border: 2px solid #eee;
+    }
+
+    .block-title {
+      font-weight: bold;
+      margin: 18px 0 6px;
+      font-size: 1.3rem;
+    }
+
+    .audio-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .tip-box {
+      background: #fff5fb;
+      border: 1px solid #ffc4df;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      line-height: 1.9;
+      font-size: 1.1rem;
+    }
+
+    table {
+      width: 100%;
+      font-size: 1.2rem;
+      border-collapse: collapse;
+    }
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .zh {
+      color: #555;
+      font-size: 0.95em;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.7rem; }
+      .play-btn { font-size: 1rem; padding: 9px 18px; }
+      .speed-btn { font-size: 0.9rem; padding: 7px 14px; }
+      table { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ---------------------- 星期二 Listening --------------------------- -->
+<div class="section">
+
+  <h1>Week 14 – Tuesday i_e Words</h1>
+  <div class="subtitle">看圖、聽 mp3，練習 i_e 長音單字（/ai/ 音）。</div>
+
+  <div class="pic-audio-box">
+    <button class="play-btn" id="btnPic">▶ 整段播放</button>
+    <button class="play-btn" id="btnPicSent">▶ 分句播放</button>
+    <br>
+    <button class="speed-btn speed-active" id="speed1_tue">1.0×</button>
+    <button class="speed-btn" id="speed08_tue">0.8×</button>
+    <button class="speed-btn" id="speed12_tue">1.2×</button>
+  </div>
+
+  <div class="progress-box"><div class="progress-bar" id="progressPic"></div></div>
+
+  <div class="img-wrap">
+    <img src="Brushing_My_Teeth.png" alt="Brushing My Teeth">
+  </div>
+
+  <audio id="audioPic" src="Brushing_Text.mp3"></audio>
+  <audio id="audioPicSent" src="Brushing_Text_Sentences.mp3"></audio>
+
+  <div class="block-title">🎧 單字練習</div>
+
+  <div class="audio-box">
+    <button class="play-btn" id="btnWords">▶ Play / Pause（單字）</button>
+    <audio id="audioWords" src="Tue_ie_words.mp3"></audio>
+
+    <div class="progress-box">
+      <div class="progress-bar" id="progressWords"></div>
+    </div>
+  </div>
+
+  <div class="block-title">🔊 i_e 發音技巧</div>
+  <div class="tip-box">
+    ⭐ <strong>i_e = /ai/（愛）的聲音，嘴型技巧：先「啊」再「咿」</strong><br><br>
+    /ai/ 的嘴型是：
+    <ul>
+      <li><strong>1：</strong>先念短短的「啊」</li>
+      <li><strong>2：</strong>再把嘴角往旁邊拉成「咿」</li>
+    </ul>
+    → <strong>「啊 ➜ 咿」＝ ai（愛）</strong>
+  </div>
+
+  <table>
+    <tr><td>1</td><td>smile</td><td>微笑</td></tr>
+    <tr><td>2</td><td>nice</td><td>好的</td></tr>
+    <tr><td>3</td><td>line</td><td>線條</td></tr>
+    <tr><td>4</td><td>side</td><td>側邊</td></tr>
+    <tr><td>5</td><td>time</td><td>時間</td></tr>
+    <tr><td>6</td><td>white</td><td>白色</td></tr>
+    <tr><td>7</td><td>bike</td><td>腳踏車</td></tr>
+    <tr><td>8</td><td>like</td><td>喜歡</td></tr>
+    <tr><td>9</td><td>nine</td><td>九</td></tr>
+    <tr><td>10</td><td>pine</td><td>松樹</td></tr>
+    <tr><td>11</td><td>kite</td><td>風箏</td></tr>
+    <tr><td>12</td><td>hide</td><td>躲藏</td></tr>
+    <tr><td>13</td><td>ride</td><td>騎、乘坐</td></tr>
+    <tr><td>14</td><td>wide</td><td>寬的</td></tr>
+    <tr><td>15</td><td>fine</td><td>很棒的</td></tr>
+    <tr><td>16</td><td>rice</td><td>米飯</td></tr>
+  </table>
+
+</div>
+
+<!-- ---------------------- 星期三 Writing --------------------------- -->
+<div class="section">
+
+  <h1>Week 14 – Wednesday Writing</h1>
+  <div class="subtitle">聽句子，並寫出你自己的完整答案。</div>
+
+  <div class="pic-audio-box">
+    <button class="play-btn" id="btnWed">▶ Play / Pause（句子朗讀）</button>
+    <br>
+    <button class="speed-btn speed-active" id="speed1_wed">1.0×</button>
+    <button class="speed-btn" id="speed08_wed">0.8×</button>
+    <button class="speed-btn" id="speed12_wed">1.2×</button>
+  </div>
+
+  <div class="progress-box"><div class="progress-bar" id="progressWed"></div></div>
+
+  <audio id="audioWed" src="Wed_Writing.mp3"></audio>
+
+  <div class="block-title">✏ 題目</div>
+  <p><strong>It is important to brush your teeth because ____________.</strong></p>
+
+  <div class="block-title">💡 範例答案</div>
+  <ul>
+    <li>
+      It is important to brush your teeth because it keeps your teeth clean.<br>
+      <span class="zh">刷牙很重要，因為這樣可以讓你的牙齒保持乾淨。</span>
+    </li>
+    <li>
+      It is important to brush your teeth because it helps you stay healthy.<br>
+      <span class="zh">刷牙很重要，因為這樣可以幫助你保持健康。</span>
+    </li>
+    <li>
+      It is important to brush your teeth because it keeps your mouth fresh.<br>
+      <span class="zh">刷牙很重要，因為這樣可以讓你的嘴巴清新舒服。</span>
+    </li>
+  </ul>
+
+</div>
+
+<!-- ---------------------- 星期四 oi / oy --------------------------- -->
+<div class="section">
+
+  <h1>Week 14 – Thursday oi & oy</h1>
+  <div class="subtitle">學習雙母音 oi / oy 的發音，並練習單字和句子。</div>
+
+  <!-- 單字朗讀（無速度控制） -->
+  <div class="block-title">🎧 單字朗讀</div>
+  <div class="pic-audio-box">
+    <button class="play-btn" id="btnThuWords">▶ Play / Pause（oi / oy 單字）</button>
+  </div>
+  <div class="progress-box"><div class="progress-bar" id="progressThuWords"></div></div>
+  <audio id="audioThuWords" src="Thu_oi_oy_words.mp3"></audio>
+
+  <!-- oi / oy 說明 -->
+  <div class="tip-box">
+    ⭐ <strong>oi / oy 的發音一樣，都是 /ɔɪ/，像「喔依」。</strong><br><br>
+    規則小提醒：
+    <ul>
+      <li>字<strong>中間</strong>通常用 <strong>oi</strong></li>
+      <li>字<strong>結尾</strong>通常用 <strong>oy</strong></li>
+    </ul>
+  </div>
+
+  <!-- 單字表：OI -->
+  <div class="block-title">🔤 oi words（字中間用 oi）</div>
+  <table>
+    <tr><td>point</td><td>指出</td></tr>
+    <tr><td>noise</td><td>噪音</td></tr>
+    <tr><td>boil</td><td>煮沸</td></tr>
+    <tr><td>coin</td><td>硬幣</td></tr>
+    <tr><td>oil</td><td>油</td></tr>
+    <tr><td>toilet</td><td>廁所</td></tr>
+    <tr><td>join</td><td>加入</td></tr>
+    <tr><td>soil</td><td>土壤</td></tr>
+    <tr><td>foil</td><td>錫箔/挫敗</td></tr>
+    <tr><td>voice</td><td>聲音</td></tr>
+    <tr><td>choice</td><td>選擇</td></tr>
+    <tr><td>spoil</td><td>寵壞/破壞</td></tr>
+    <tr><td>moist</td><td>潮濕的</td></tr>
+    <tr><td>poison</td><td>毒藥</td></tr>
+    <tr><td>avoid</td><td>避免</td></tr>
+    <tr><td>appointment</td><td>預約/約會</td></tr>
+  </table>
+
+  <!-- 單字表：OY -->
+  <div class="block-title" style="margin-top:22px;">🔤 oy words（字尾用 oy）</div>
+  <table>
+    <tr><td>boy</td><td>男孩</td></tr>
+    <tr><td>joy</td><td>喜悅</td></tr>
+    <tr><td>toy</td><td>玩具</td></tr>
+    <tr><td>soy</td><td>大豆</td></tr>
+    <tr><td>oyster</td><td>牡蠣</td></tr>
+    <tr><td>destroy</td><td>破壞</td></tr>
+    <tr><td>enjoy</td><td>享受</td></tr>
+    <tr><td>annoy</td><td>惹惱</td></tr>
+    <tr><td>employ</td><td>聘用</td></tr>
+    <tr><td>cowboy</td><td>牛仔</td></tr>
+    <tr><td>decoy</td><td>誘餌</td></tr>
+    <tr><td>royal</td><td>皇家的</td></tr>
+    <tr><td>loyal</td><td>忠誠的</td></tr>
+    <tr><td>deploy</td><td>部署</td></tr>
+    <tr><td>voyage</td><td>航行</td></tr>
+    <tr><td>convoy</td><td>護送隊</td></tr>
+  </table>
+
+  <!-- 句子朗讀（有速度控制） -->
+  <div class="block-title">📖 句子朗讀</div>
+  <div class="pic-audio-box">
+    <button class="play-btn" id="btnThuSent">▶ Play / Pause（oi / oy 句子）</button>
+    <br>
+    <button class="speed-btn speed-active" id="speed1_thu">1.0×</button>
+    <button class="speed-btn" id="speed08_thu">0.8×</button>
+    <button class="speed-btn" id="speed12_thu">1.2×</button>
+  </div>
+  <div class="progress-box"><div class="progress-bar" id="progressThuSent"></div></div>
+  <audio id="audioThuSent" src="Thu_oi_oy_sentences.mp3"></audio>
+
+  <!-- 例句 -->
+  <ul>
+    <li>
+      She felt <strong>joy</strong> when she saw her puppy wagging its tail.<br>
+      <span class="zh">當她看到小狗搖著尾巴時，她感到很開心。</span>
+    </li>
+    <li>
+      She used her finger to <strong>point</strong> at the sky.<br>
+      <span class="zh">她用手指指向天空。</span>
+    </li>
+    <li>
+      My little sister loves to play with her favorite <strong>toy</strong>.<br>
+      <span class="zh">我妹妹很喜歡玩她最喜歡的玩具。</span>
+    </li>
+    <li>
+      The loud <strong>noise</strong> woke up the sleeping cat.<br>
+      <span class="zh">巨大的噪音把正在睡覺的貓吵醒了。</span>
+    </li>
+  </ul>
+
+</div>
+
+
+
+<script>
+/* ------------------ DOM 取得 ------------------ */
+const audioPic       = document.getElementById("audioPic");
+const audioPicSent   = document.getElementById("audioPicSent");
+const audioWords     = document.getElementById("audioWords");
+const audioWed       = document.getElementById("audioWed");
+const audioThuWords  = document.getElementById("audioThuWords");
+const audioThuSent   = document.getElementById("audioThuSent");
+
+const btnPic     = document.getElementById("btnPic");
+const btnPicSent = document.getElementById("btnPicSent");
+const btnWords   = document.getElementById("btnWords");
+const btnWed     = document.getElementById("btnWed");
+const btnThuWords= document.getElementById("btnThuWords");
+const btnThuSent = document.getElementById("btnThuSent");
+
+const progressPic      = document.getElementById("progressPic");
+const progressWords    = document.getElementById("progressWords");
+const progressWed      = document.getElementById("progressWed");
+const progressThuWords = document.getElementById("progressThuWords");
+const progressThuSent  = document.getElementById("progressThuSent");
+
+/* 速度按鈕 */
+const btnSpeed1_tue  = document.getElementById("speed1_tue");
+const btnSpeed08_tue = document.getElementById("speed08_tue");
+const btnSpeed12_tue = document.getElementById("speed12_tue");
+
+const btnSpeed1_wed  = document.getElementById("speed1_wed");
+const btnSpeed08_wed = document.getElementById("speed08_wed");
+const btnSpeed12_wed = document.getElementById("speed12_wed");
+
+const btnSpeed1_thu  = document.getElementById("speed1_thu");
+const btnSpeed08_thu = document.getElementById("speed08_thu");
+const btnSpeed12_thu = document.getElementById("speed12_thu");
+
+/* ------------------ 停止其他音檔並重頭 ------------------ */
+function stopOthers(except) {
+  const audios = [audioPic, audioPicSent, audioWords, audioWed, audioThuWords, audioThuSent];
+  audios.forEach(a => {
+    if (a && a !== except) {
+      a.pause();
+      a.currentTime = 0;
+    }
+  });
+
+  btnPic.textContent      = "▶ 整段播放";
+  btnPicSent.textContent  = "▶ 分句播放";
+  btnWords.textContent    = "▶ Play / Pause（單字）";
+  btnWed.textContent      = "▶ Play / Pause（句子朗讀）";
+  btnThuWords.textContent = "▶ Play / Pause（oi / oy 單字）";
+  btnThuSent.textContent  = "▶ Play / Pause（oi / oy 句子）";
+}
+
+/* ------------------ 星期二：整段 ------------------ */
+btnPic.addEventListener("click", () => {
+  if (audioPic.paused) {
+    stopOthers(audioPic);
+    audioPic.play();
+    btnPic.textContent = "⏸ 整段暫停";
+  } else {
+    audioPic.pause();
+    btnPic.textContent = "▶ 整段播放";
+  }
+});
+
+/* ------------------ 星期二：分句 ------------------ */
+btnPicSent.addEventListener("click", () => {
+  if (audioPicSent.paused) {
+    stopOthers(audioPicSent);
+    audioPicSent.play();
+    btnPicSent.textContent = "⏸ 分句暫停";
+  } else {
+    audioPicSent.pause();
+    btnPicSent.textContent = "▶ 分句播放";
+  }
+});
+
+/* ------------------ 播放速度：星期二 ------------------ */
+function setSpeedTue(rate) {
+  audioPic.playbackRate     = rate;
+  audioPicSent.playbackRate = rate;
+
+  btnSpeed1_tue.classList.remove("speed-active");
+  btnSpeed08_tue.classList.remove("speed-active");
+  btnSpeed12_tue.classList.remove("speed-active");
+
+  if (rate === 1.0) btnSpeed1_tue.classList.add("speed-active");
+  if (rate === 0.8) btnSpeed08_tue.classList.add("speed-active");
+  if (rate === 1.2) btnSpeed12_tue.classList.add("speed-active");
+}
+btnSpeed1_tue.addEventListener("click", () => setSpeedTue(1.0));
+btnSpeed08_tue.addEventListener("click", () => setSpeedTue(0.8));
+btnSpeed12_tue.addEventListener("click", () => setSpeedTue(1.2));
+
+/* ------------------ 播放速度：星期三 ------------------ */
+function setSpeedWed(rate) {
+  audioWed.playbackRate = rate;
+
+  btnSpeed1_wed.classList.remove("speed-active");
+  btnSpeed08_wed.classList.remove("speed-active");
+  btnSpeed12_wed.classList.remove("speed-active");
+
+  if (rate === 1.0) btnSpeed1_wed.classList.add("speed-active");
+  if (rate === 0.8) btnSpeed08_wed.classList.add("speed-active");
+  if (rate === 1.2) btnSpeed12_wed.classList.add("speed-active");
+}
+btnSpeed1_wed.addEventListener("click", () => setSpeedWed(1.0));
+btnSpeed08_wed.addEventListener("click", () => setSpeedWed(0.8));
+btnSpeed12_wed.addEventListener("click", () => setSpeedWed(1.2));
+
+/* ------------------ 播放速度：星期四（只控制句子） ------------------ */
+function setSpeedThu(rate) {
+  audioThuSent.playbackRate  = rate;
+
+  btnSpeed1_thu.classList.remove("speed-active");
+  btnSpeed08_thu.classList.remove("speed-active");
+  btnSpeed12_thu.classList.remove("speed-active");
+
+  if (rate === 1.0) btnSpeed1_thu.classList.add("speed-active");
+  if (rate === 0.8) btnSpeed08_thu.classList.add("speed-active");
+  if (rate === 1.2) btnSpeed12_thu.classList.add("speed-active");
+}
+btnSpeed1_thu.addEventListener("click", () => setSpeedThu(1.0));
+btnSpeed08_thu.addEventListener("click", () => setSpeedThu(0.8));
+btnSpeed12_thu.addEventListener("click", () => setSpeedThu(1.2));
+
+/* ------------------ 星期二：共用進度條 ------------------ */
+function updatePicProgress() {
+  let a = !audioPic.paused ? audioPic : (!audioPicSent.paused ? audioPicSent : null);
+  if (a && !isNaN(a.duration)) {
+    progressPic.style.width = (a.currentTime / a.duration) * 100 + "%";
+  }
+}
+audioPic.addEventListener("timeupdate", updatePicProgress);
+audioPicSent.addEventListener("timeupdate", updatePicProgress);
+audioPic.addEventListener("ended", () => {
+  btnPic.textContent = "▶ 整段播放";
+  progressPic.style.width = "0%";
+});
+audioPicSent.addEventListener("ended", () => {
+  btnPicSent.textContent = "▶ 分句播放";
+  progressPic.style.width = "0%";
+});
+
+/* ------------------ 單字播放 ------------------ */
+btnWords.addEventListener("click", () => {
+  if (audioWords.paused) {
+    stopOthers(audioWords);
+    audioWords.play();
+    btnWords.textContent = "⏸ Pause（單字）";
+  } else {
+    audioWords.pause();
+    btnWords.textContent = "▶ Play / Pause（單字）";
+  }
+});
+audioWords.addEventListener("timeupdate", () => {
+  if (!isNaN(audioWords.duration)) {
+    progressWords.style.width = (audioWords.currentTime / audioWords.duration) * 100 + "%";
+  }
+});
+audioWords.addEventListener("ended", () => {
+  btnWords.textContent = "▶ Play / Pause（單字）";
+  progressWords.style.width = "0%";
+});
+
+/* ------------------ 星期三播放 ------------------ */
+btnWed.addEventListener("click", () => {
+  if (audioWed.paused) {
+    stopOthers(audioWed);
+    audioWed.play();
+    btnWed.textContent = "⏸ Pause（句子朗讀）";
+  } else {
+    audioWed.pause();
+    btnWed.textContent = "▶ Play / Pause（句子朗讀）";
+  }
+});
+audioWed.addEventListener("timeupdate", () => {
+  if (!isNaN(audioWed.duration)) {
+    progressWed.style.width = (audioWed.currentTime / audioWed.duration) * 100 + "%";
+  }
+});
+audioWed.addEventListener("ended", () => {
+  btnWed.textContent = "▶ Play / Pause（句子朗讀）";
+  progressWed.style.width = "0%";
+});
+
+/* ------------------ 星期四：單字朗讀 ------------------ */
+btnThuWords.addEventListener("click", () => {
+  if (audioThuWords.paused) {
+    stopOthers(audioThuWords);
+    audioThuWords.play();
+    btnThuWords.textContent = "⏸ Pause（oi / oy 單字）";
+  } else {
+    audioThuWords.pause();
+    btnThuWords.textContent = "▶ Play / Pause（oi / oy 單字）";
+  }
+});
+audioThuWords.addEventListener("timeupdate", () => {
+  if (!isNaN(audioThuWords.duration)) {
+    progressThuWords.style.width =
+      (audioThuWords.currentTime / audioThuWords.duration) * 100 + "%";
+  }
+});
+audioThuWords.addEventListener("ended", () => {
+  btnThuWords.textContent = "▶ Play / Pause（oi / oy 單字）";
+  progressThuWords.style.width = "0%";
+});
+
+/* ------------------ 星期四：句子朗讀 ------------------ */
+btnThuSent.addEventListener("click", () => {
+  if (audioThuSent.paused) {
+    stopOthers(audioThuSent);
+    audioThuSent.play();
+    btnThuSent.textContent = "⏸ Pause（oi / oy 句子）";
+  } else {
+    audioThuSent.pause();
+    btnThuSent.textContent = "▶ Play / Pause（oi / oy 句子）";
+  }
+});
+audioThuSent.addEventListener("timeupdate", () => {
+  if (!isNaN(audioThuSent.duration)) {
+    progressThuSent.style.width =
+      (audioThuSent.currentTime / audioThuSent.duration) * 100 + "%";
+  }
+});
+audioThuSent.addEventListener("ended", () => {
+  btnThuSent.textContent = "▶ Play / Pause（oi / oy 句子）";
+  progressThuSent.style.width = "0%";
+});
+</script>
+
+</body>
+</html>
